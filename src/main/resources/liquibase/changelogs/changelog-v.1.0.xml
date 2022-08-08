@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="0" author="christofer.guimaraes">
+
+        <createTable tableName="email">
+            <column name="id" type="uuid" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false" unique="true" />
+            </column>
+            <column name="owner_ref" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_from" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_to" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="send_date_email" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_email" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
