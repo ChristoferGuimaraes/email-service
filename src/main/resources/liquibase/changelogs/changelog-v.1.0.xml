@@ -11,7 +11,7 @@
     <changeSet id="0" author="christofer.guimaraes">
 
         <createTable tableName="email">
-            <column name="id" type="uuid" autoIncrement="${autoIncrement}">
+            <column name="email_id" type="uuid" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
             <column name="owner_ref" type="varchar(255)">
@@ -29,12 +29,10 @@
             <column name="text" type="TEXT">
                 <constraints nullable="false"/>
             </column>
-            <column name="send_date_email" type="timestamp">
+            <column name="send_data_email" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="status_email" type="varchar(10)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="status_email" type="varchar(10)"/>
         </createTable>
     </changeSet>
 
