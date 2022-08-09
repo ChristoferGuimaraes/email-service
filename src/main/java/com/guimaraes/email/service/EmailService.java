@@ -23,15 +23,15 @@ public class EmailService {
 
     public void sendEmail(EmailEntity emailEntity) {
         emailEntity.setSendDataEmail(LocalDateTime.now());
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setFrom(emailEntity.getEmailFrom());
+        message.setTo(emailEntity.getEmailTo());
+        message.setSubject(emailEntity.getSubject());
+        message.setText(emailEntity.getText());
 
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(emailEntity.getEmailFrom());
-            message.setTo(emailEntity.getEmailTo());
-            message.setSubject(emailEntity.getSubject());
-            message.setText(emailEntity.getText());
             emailSender.send(message);
-
             emailEntity.setStatusEmail(StatusEmail.SENT);
         } catch (MailException e) {
             emailEntity.setStatusEmail(StatusEmail.ERROR);
@@ -40,6 +40,5 @@ public class EmailService {
         }
 
     }
-
 
 }
