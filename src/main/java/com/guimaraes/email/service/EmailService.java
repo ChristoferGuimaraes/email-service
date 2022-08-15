@@ -3,6 +3,8 @@ package com.guimaraes.email.service;
 import com.guimaraes.email.entity.EmailEntity;
 import com.guimaraes.email.enums.StatusEmail;
 import com.guimaraes.email.repository.EmailRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -38,7 +40,10 @@ public class EmailService {
         } finally {
             emailRepository.save(emailEntity);
         }
+    }
 
+    public Page<EmailEntity> findAll(Pageable pageable) {
+        return emailRepository.findAll(pageable);
     }
 
 }
