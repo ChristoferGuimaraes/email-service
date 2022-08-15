@@ -23,6 +23,9 @@ spring:
           auth: true
           starttls:
             enable: true
+  rabbitmq:
+    addresses: amqps://kjrcondq:gVITtKja_4S9vAxaTypaGza2b1pjQ6dx@shrimp.rmq.cloudamqp.com/kjrcondq
+    queue: email-service
 
 server:
   port: 9091
