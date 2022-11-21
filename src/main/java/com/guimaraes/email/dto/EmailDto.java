@@ -1,5 +1,6 @@
 package com.guimaraes.email.dto;
 
+import com.guimaraes.email.enums.StatusEmail;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -23,4 +24,6 @@ public class EmailDto {
 
     @NotBlank
     private String text;
+
+    private StatusEmail statusEmail;
 }

@@ -1,5 +1,6 @@
 package com.guimaraes.email.controller;
 
+import com.guimaraes.email.consumer.EmailConsumer;
 import com.guimaraes.email.dto.EmailDto;
 import com.guimaraes.email.entity.EmailEntity;
 import com.guimaraes.email.service.EmailService;
@@ -21,17 +22,16 @@ import javax.validation.Valid;
 public class EmailController {
 
     private final EmailService emailService;
+    private final EmailConsumer emailConsumer;
 
-    public EmailController(EmailService emailService) {
+    public EmailController(EmailService emailService, EmailConsumer emailConsumer) {
+        this.emailConsumer = emailConsumer;
         this.emailService = emailService;
     }
 
     @PostMapping("/sending-email")
-    public ResponseEntity<EmailEntity> sendingEmail(@RequestBody @Valid EmailDto emailDto) {
-        EmailEntity emailEntity = new EmailEntity();
-        BeanUtils.copyProperties(emailDto, emailEntity);
-        emailService.sendEmail(emailEntity);
-        return new ResponseEntity<>(emailEntity, HttpStatus.CREATED);
+    public ResponseEntity<EmailDto> sendingEmail(@RequestBody @Valid EmailDto emailDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(emailConsumer.listen(emailDto));
     }
 
     @GetMapping("/emails")

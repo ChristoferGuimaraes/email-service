@@ -1,8 +1,10 @@
 package com.guimaraes.email.service;
 
+import com.guimaraes.email.dto.EmailDto;
 import com.guimaraes.email.entity.EmailEntity;
 import com.guimaraes.email.enums.StatusEmail;
 import com.guimaraes.email.repository.EmailRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mail.MailException;
@@ -23,7 +25,7 @@ public class EmailService {
         this.emailSender = emailSender;
     }
 
-    public void sendEmail(EmailEntity emailEntity) {
+    public EmailDto sendEmail(EmailEntity emailEntity) {
         emailEntity.setSendDataEmail(LocalDateTime.now());
         SimpleMailMessage message = new SimpleMailMessage();
 
@@ -39,6 +41,11 @@ public class EmailService {
             emailEntity.setStatusEmail(StatusEmail.ERROR);
         } finally {
             emailRepository.save(emailEntity);
+
+            EmailDto emailDto = new EmailDto();
+            BeanUtils.copyProperties(emailEntity, emailDto);
+
+            return emailDto;
         }
     }
 
